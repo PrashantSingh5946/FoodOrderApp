@@ -11,19 +11,28 @@ const Cart = (props) => {
 
   const hasItems = cartState.items.length > 0;
 
+  const calculateTotal = (items) => {
+    const initialValue = 0;
+    const sumWithInitial = items.reduce(
+      (accumulator, currentValue) => accumulator + currentValue.amount * currentValue.price,
+      initialValue
+    );
+    return sumWithInitial;
+  }
+
   const cartItemRemoveHandler = (id) => {
     var index = cartState.items.findIndex((item) => item.id === id);
     if (cartState.items[index].amount > 1) {
-      var temp = cartState.items;
+      var temp = [...cartState.items];
       temp[index].amount--;
       setCartState({
         items: [...temp],
-        totalAmount: cartState.totalAmount - cartState.items[index].price,
+        totalAmount: calculateTotal(temp),
       });
-    } else {
-      var temp = cartState.items;
-      var deduction = cartState.items[index].price;
-      setCartState({ items: [], totalAmount: 0 });
+    } else if (cartState.items[index].amount == 1) {
+      var temp = [...cartState.items];
+      temp = temp.filter((item) => item.id != id);
+      setCartState({ items: [...temp], totalAmount: calculateTotal(temp) });
     }
   };
 

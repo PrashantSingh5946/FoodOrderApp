@@ -11,7 +11,7 @@ const HeaderCartButton = (props) => {
   var total = 0;
   var array = [...cartState.items];
   total = array.reduce(reducer, 0);
-  console.log(array);
+
 
   useEffect(() => {
     if (items.length === 0) {
@@ -21,7 +21,7 @@ const HeaderCartButton = (props) => {
     var id = setTimeout(() => {
       setIsPop(false);
     }, 300);
-    return()=>{clearTimeout(id)};
+    return () => { clearTimeout(id) };
   }, [total]);
 
   return (
