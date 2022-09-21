@@ -12,7 +12,10 @@ const Cart = (props) => {
   const hasItems = cartState.items.length > 0;
 
   const cartItemRemoveHandler = (id) => {
+
     var index = cartState.items.findIndex((item) => item.id === id);
+    
+    
     if (cartState.items[index].amount > 1) {
       var temp = cartState.items;
       temp[index].amount--;
@@ -21,9 +24,9 @@ const Cart = (props) => {
         totalAmount: cartState.totalAmount - cartState.items[index].price,
       });
     } else {
-      var temp = cartState.items;
+      var temp = cartState.items.filter((item,myIndex) => myIndex!=index);
       var deduction = cartState.items[index].price;
-      setCartState({ items: [], totalAmount: 0 });
+      setCartState({ items: [...temp], totalAmount: cartState.totalAmount-deduction });
     }
   };
 
