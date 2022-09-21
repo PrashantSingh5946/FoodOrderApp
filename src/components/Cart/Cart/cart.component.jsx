@@ -32,17 +32,10 @@ const Cart = (props) => {
         items: [...temp],
         totalAmount: calculateTotal(temp),
       });
-<<<<<<< HEAD
     } else {
       var temp = cartState.items.filter((item,myIndex) => myIndex!=index);
       var deduction = cartState.items[index].price;
       setCartState({ items: [...temp], totalAmount: cartState.totalAmount-deduction });
-=======
-    } else if (cartState.items[index].amount == 1) {
-      var temp = [...cartState.items];
-      temp = temp.filter((item) => item.id != id);
-      setCartState({ items: [...temp], totalAmount: calculateTotal(temp) });
->>>>>>> 30db6afa307933dd43d4c64fc4de3bdc134965a9
     }
   };
 
